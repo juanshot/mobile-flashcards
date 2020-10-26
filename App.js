@@ -7,6 +7,10 @@ import store from "./store";
 import DeckDetail from "./screens/DecksMain";
 
 export default function App() {
+  store.subscribe(() => {
+    const { decks } = store.getState();
+    console.log("store has changed", decks);
+  });
   return (
     <Provider store={store}>
       <SafeAreaView style={styles.container}>

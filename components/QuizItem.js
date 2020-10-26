@@ -1,43 +1,52 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet } from "react-native";
-import Button from "../components/Button";
+import { View, StyleSheet, Text } from "react-native";
+import NextButton from "./NextButton";
+import ResultButtons from "./ResultButtons";
 import QuizCard from "./QuizCard";
 import Container from "../components/Container";
 import ScreenWithActions from "../components/hoc/ScreenWithAnctionLayout";
 
 const QuizItem = ({ card, isLastCard, navigation }) => {
   const [answerDisplayed, setAnswerDisplayed] = useState(false);
+  const [questionMarked, setQuestionMarked] = useState(null);
 
-  const handleShowAnswer = () => {
-    if (!answerDisplayed) {
-      setAnswerDisplayed(true);
-    }
+  const handleQuestionPress = () => {
+    setAnswerDisplayed(true);
   };
+
+  const handleMarkQuestion = (markedAs) => {
+    console.log("marked as", markedAs);
+    setQuestionMarked(markedAs);
+  };
+
   const goToNextQuestion = (card, isLastCard) => {
-    if (isLastCard) {
-      console.log("this is the last card");
+    if (!isLastCard) {
+      navigation.navigate(`Card-${card + 1}`);
       return;
     }
-    navigation.navigate(`Card-${card + 1}`);
+    navigation.navigate("QuizResult");
   };
   return (
     <Container>
       <ScreenWithActions
         top={
           <View style={styles.quizElement}>
-            <QuizCard />
+            <QuizCard card={card} onPress={handleQuestionPress} />
           </View>
         }
         bottom={
           <React.Fragment>
-            <Button large onPress={() => handleShowAnswer()}>
-              Show Answer
-            </Button>
             {answerDisplayed && (
-              <Button large onPress={() => goToNextQuestion(card, isLastCard)}>
-                Next
-              </Button>
+              <ResultButtons
+                isCorrect={questionMarked}
+                onPress={handleMarkQuestion}
+              />
             )}
+            <NextButton
+              isLast={isLastCard}
+              canContinue={answerDisplayed && questionMarked !== null}
+              onPress={() => goToNextQuestion(card, isLastCard)}
+            />
           </React.Fragment>
         }
       />
@@ -50,6 +59,7 @@ export default QuizItem;
 const styles = StyleSheet.create({
   quizElement: {
     flexDirection: "row",
+    height: 300,
   },
   actionButton: {
     marginVertical: 1,

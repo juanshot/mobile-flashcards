@@ -5,10 +5,10 @@ import Card from "./Card";
 const DeckItem = (props) => (
   <Card onPress={props.onPress}>
     <View>
-      <Text>{JSON.stringify(props)}</Text>
+      <Text>{props.item.name}</Text>
     </View>
     <View>
-      <Text>{props.numCards} cards</Text>
+      <Text>{props.item.cards ? props.item.cards.length : 0} cards</Text>
     </View>
   </Card>
 );

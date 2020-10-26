@@ -7,7 +7,14 @@ import { Buttons } from "../styles";
 const Button = (props) => {
   const { OS } = Platform;
   const platformStyle = styles[`${OS}Btn`];
-  const variants = ["outline", "large", "link"]; // variants accepted for this component
+  const variants = [
+    "outline",
+    "large",
+    "link",
+    "disabled",
+    "primary",
+    "danger",
+  ]; // variants accepted for this component
   const variantsFromProps = getElementsFromProps(variants, props);
   const variantStyles = Object.keys(variantsFromProps).map(
     (variant) => styles[variant]
@@ -31,11 +38,20 @@ const styles = StyleSheet.create({
   btn: {
     ...Buttons.base,
   },
+  primary: {
+    ...Buttons.primary,
+  },
+  danger: {
+    ...Buttons.danger,
+  },
   iosBtn: {
     backgroundColor: "purple",
   },
   androidBtn: {
     backgroundColor: "blue",
+  },
+  disabled: {
+    ...Buttons.disabled,
   },
   outline: {
     ...Buttons.outline,

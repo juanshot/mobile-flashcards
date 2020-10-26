@@ -1,14 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
 import { View, StyleSheet } from "react-native";
 import Container from "../components/Container";
 import Button from "../components/Button";
 import Text from "../components/Text";
 
-const DeckDetail = ({ navigation, route }) => {
-  const { id } = route.params;
+import { Typography } from "../styles";
 
+const DeckDetail = ({ navigation, deck }) => {
   const goToRoute = (routeName) => {
-    navigation.navigate({ name: routeName });
+    navigation.navigate({ name: routeName, params: { id: deck.id } });
   };
   const onDelete = () => {
     console.log("delete");
@@ -16,8 +17,8 @@ const DeckDetail = ({ navigation, route }) => {
   return (
     <Container>
       <View style={styles.deckDetail}>
-        <Text>Deck1 -- {id}</Text>
-        <Text>3 cards</Text>
+        <Text style={styles.title}>{deck.name} </Text>
+        <Text style={styles.description}>{deck.cards.length} cards</Text>
       </View>
       <View style={styles.deckActions}>
         <Button outline onPress={() => goToRoute("NewCard")}>
@@ -32,15 +33,27 @@ const DeckDetail = ({ navigation, route }) => {
   );
 };
 
-export default DeckDetail;
+const mapStateToProps = ({ decks }, { route }) => ({
+  deck: decks[route.params.id],
+});
+
+export default connect(mapStateToProps)(DeckDetail);
 
 const styles = StyleSheet.create({
   deckDetail: {
     flex: 3,
     justifyContent: "flex-start",
+    alignItems: "center",
   },
   deckActions: {
     flex: 1,
     justifyContent: "space-between",
+  },
+  title: {
+    ...Typography.headerText,
+  },
+  description: {
+    marginVertical: 5,
+    ...Typography.descriptionText,
   },
 });

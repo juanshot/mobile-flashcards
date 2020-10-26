@@ -26,25 +26,31 @@ export const small = {
   paddingVertical: Spacing.small + 2,
   width: 75,
 };
-
+export const disabled = {
+  ...base,
+  backgroundColor: Colors.lightGray,
+};
 export const link = {
   ...base,
   backgroundColor: "transparent",
 };
-
 export const outline = {
   ...base,
   borderWidth: 1,
   borderColor: Colors.darkestGray,
   backgroundColor: Colors.white,
 };
-
 export const textLink = {
   ...text,
   color: Colors.linkText,
 };
-
 export const textOutLine = {
   ...text,
   color: Colors.darkestGray,
+};
+export const primary = {
+  backgroundColor: "blue",
+};
+export const danger = {
+  backgroundColor: "red",
 };
