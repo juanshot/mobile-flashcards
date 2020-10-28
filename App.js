@@ -4,17 +4,19 @@ import { Provider } from "react-redux";
 import { StyleSheet, SafeAreaView } from "react-native";
 import store from "./store";
 
-import DeckDetail from "./screens/DecksMain";
+import DecksMain from "./screens/DecksMain";
+
+import { handleSaveDecks } from "./store/actions/decks";
 
 export default function App() {
   store.subscribe(() => {
     const { decks } = store.getState();
-    console.log("store has changed", decks);
+    store.dispatch(handleSaveDecks(JSON.stringify(decks)));
   });
   return (
     <Provider store={store}>
       <SafeAreaView style={styles.container}>
-        <DeckDetail />
+        <DecksMain />
       </SafeAreaView>
     </Provider>
   );

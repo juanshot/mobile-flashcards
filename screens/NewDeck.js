@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Alert } from "react-native";
 import { connect } from "react-redux";
 import Container from "../components/Container";
 import Input from "../components/Input";

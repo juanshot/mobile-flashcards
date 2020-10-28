@@ -6,8 +6,21 @@ import Button from "../components/Button";
 import Text from "../components/Text";
 
 import { Typography } from "../styles";
+import { createQuiz } from "../store/actions/quiz";
 
-const DeckDetail = ({ navigation, deck }) => {
+const DeckDetail = ({ dispatch, navigation, decks, route }) => {
+  const deck = decks[route.params.id];
+
+  const handleOpenQuiz = () => {
+    console.log(deck.cards);
+    dispatch(
+      createQuiz({
+        numberOfCards: deck.cards.length,
+        cards: {},
+      })
+    );
+    goToRoute("Quiz");
+  };
   const goToRoute = (routeName) => {
     navigation.navigate({ name: routeName, params: { id: deck.id } });
   };
@@ -24,7 +37,7 @@ const DeckDetail = ({ navigation, deck }) => {
         <Button outline onPress={() => goToRoute("NewCard")}>
           Add Card
         </Button>
-        <Button onPress={() => goToRoute("Quiz")}>Start Quiz</Button>
+        <Button onPress={handleOpenQuiz}>Start Quiz</Button>
         <Button link onPress={onDelete}>
           Delete Deck
         </Button>
@@ -33,8 +46,8 @@ const DeckDetail = ({ navigation, deck }) => {
   );
 };
 
-const mapStateToProps = ({ decks }, { route }) => ({
-  deck: decks[route.params.id],
+const mapStateToProps = ({ decks }) => ({
+  decks,
 });
 
 export default connect(mapStateToProps)(DeckDetail);

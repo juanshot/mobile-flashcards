@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { connect } from "react-redux";
+import { View, StyleSheet } from "react-native";
 import NextButton from "./NextButton";
 import ResultButtons from "./ResultButtons";
 import QuizCard from "./QuizCard";
 import Container from "../components/Container";
 import ScreenWithActions from "../components/hoc/ScreenWithAnctionLayout";
 
-const QuizItem = ({ card, isLastCard, navigation }) => {
+import { addQuizAnswer } from "../store/actions/quiz";
+
+const QuizItem = ({ card, isLastCard, navigation, dispatch }) => {
   const [answerDisplayed, setAnswerDisplayed] = useState(false);
   const [questionMarked, setQuestionMarked] = useState(null);
 
@@ -15,7 +18,11 @@ const QuizItem = ({ card, isLastCard, navigation }) => {
   };
 
   const handleMarkQuestion = (markedAs) => {
-    console.log("marked as", markedAs);
+    dispatch(
+      addQuizAnswer({
+        [card.currentCard]: markedAs,
+      })
+    );
     setQuestionMarked(markedAs);
   };
 
@@ -31,7 +38,11 @@ const QuizItem = ({ card, isLastCard, navigation }) => {
       <ScreenWithActions
         top={
           <View style={styles.quizElement}>
-            <QuizCard card={card} onPress={handleQuestionPress} />
+            <QuizCard
+              card={card}
+              onPress={handleQuestionPress}
+              showResponse={answerDisplayed}
+            />
           </View>
         }
         bottom={
@@ -45,7 +56,7 @@ const QuizItem = ({ card, isLastCard, navigation }) => {
             <NextButton
               isLast={isLastCard}
               canContinue={answerDisplayed && questionMarked !== null}
-              onPress={() => goToNextQuestion(card, isLastCard)}
+              onPress={() => goToNextQuestion(card.currentCard, isLastCard)}
             />
           </React.Fragment>
         }
@@ -54,7 +65,7 @@ const QuizItem = ({ card, isLastCard, navigation }) => {
   );
 };
 
-export default QuizItem;
+export default connect()(QuizItem);
 
 const styles = StyleSheet.create({
   quizElement: {

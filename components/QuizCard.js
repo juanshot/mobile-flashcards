@@ -2,26 +2,24 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Card from "./Card";
 
+import { Typography } from "../styles";
+
 const QuizCard = ({ card, showResponse, onPress }) => {
   return (
     <Card onPress={onPress}>
       <View style={styles.stepInfo}>
-        <Text style={{ fontWeight: "bold" }}>{`${card} of 7`}</Text>
+        <Text
+          style={{ fontWeight: "bold" }}
+        >{`${card.currentCard} of ${card.cardNum}`}</Text>
       </View>
       <View style={styles.questionContent}>
-        {showResponse ? (
+        <View style={styles.questionElement}>
+          <Text style={styles.questionText}>{card.question}</Text>
+        </View>
+        {showResponse && (
           <View style={styles.questionElement}>
-            <Text>Response</Text>
+            <Text style={styles.answerText}>{card.answer}</Text>
           </View>
-        ) : (
-          <React.Fragment>
-            <View style={styles.questionElement}>
-              <Text>test</Text>
-            </View>
-            <View style={styles.questionElement}>
-              <Text>test</Text>
-            </View>
-          </React.Fragment>
         )}
       </View>
     </Card>
@@ -31,8 +29,15 @@ const QuizCard = ({ card, showResponse, onPress }) => {
 export default QuizCard;
 
 const styles = StyleSheet.create({
+  answerText: {
+    textAlign: "center",
+    ...Typography.descriptionText,
+  },
+  questionText: {
+    textAlign: "center",
+    ...Typography.headerText,
+  },
   questionContent: {
-    flexDirection: "row",
     flex: 1,
   },
   questionElement: {
