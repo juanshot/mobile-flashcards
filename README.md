@@ -6,7 +6,7 @@ the mobile flashcards allows users to study collections of flashcards. The app w
 
 First you'll have to set up your enviroment:
 
-[https://reactnative.dev/docs/environment-setup](Setup enviroment link)
+[https://reactnative.dev/docs/environment-setup]
 
 your second step will be install all the dependencies
 
