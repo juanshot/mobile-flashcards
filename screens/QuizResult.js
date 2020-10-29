@@ -6,8 +6,11 @@ import Container from "../components/Container";
 import Button from "../components/Button";
 import ScreenWithActions from "../components/hoc/ScreenWithAnctionLayout";
 import { Spacing, Typography } from "../styles";
+import { clearAndSetNotification } from "../utils/notification";
+
 const QuizResult = ({ navigation, ...results }) => {
   const goTo = (url) => {
+    clearAndSetNotification();
     navigation.navigate(url);
   };
   return (
@@ -30,7 +33,7 @@ const QuizResult = ({ navigation, ...results }) => {
                 <Text style={styles.resultText}> {results.correctAnswers}</Text>
               </Text>
               <Text style={styles.textMargin}>
-                Correct answers:
+                Incorrect answers:
                 <Text style={styles.resultText}>
                   {" "}
                   {results.incorrectAnswers}

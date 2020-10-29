@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { View, StyleSheet } from "react-native";
 import NextButton from "./NextButton";
@@ -12,6 +12,15 @@ import { addQuizAnswer } from "../store/actions/quiz";
 const QuizItem = ({ card, isLastCard, navigation, dispatch }) => {
   const [answerDisplayed, setAnswerDisplayed] = useState(false);
   const [questionMarked, setQuestionMarked] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      setAnswerDisplayed(false);
+      setQuestionMarked(null);
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   const handleQuestionPress = () => {
     setAnswerDisplayed(true);

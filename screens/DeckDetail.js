@@ -12,7 +12,6 @@ const DeckDetail = ({ dispatch, navigation, decks, route }) => {
   const deck = decks[route.params.id];
 
   const handleOpenQuiz = () => {
-    console.log(deck.cards);
     dispatch(
       createQuiz({
         numberOfCards: deck.cards.length,
@@ -23,9 +22,6 @@ const DeckDetail = ({ dispatch, navigation, decks, route }) => {
   };
   const goToRoute = (routeName) => {
     navigation.navigate({ name: routeName, params: { id: deck.id } });
-  };
-  const onDelete = () => {
-    console.log("delete");
   };
   return (
     <Container>
@@ -38,9 +34,6 @@ const DeckDetail = ({ dispatch, navigation, decks, route }) => {
           Add Card
         </Button>
         <Button onPress={handleOpenQuiz}>Start Quiz</Button>
-        <Button link onPress={onDelete}>
-          Delete Deck
-        </Button>
       </View>
     </Container>
   );

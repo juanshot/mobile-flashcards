@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { FlatList, Text } from "react-native";
+import { FlatList } from "react-native";
 import Container from "../components/Container";
 import DeckItem from "../components/DeckItem";
 

@@ -1,4 +1,4 @@
-import { CREATE_QUIZ, ADD_QUIZ_ANSWER } from "../types/quiz";
+import { CREATE_QUIZ, ADD_QUIZ_ANSWER } from "../actions/quiz";
 
 export default function quiz(state = {}, action) {
   switch (action.type) {

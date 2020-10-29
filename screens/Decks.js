@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { AsyncStorage } from "react-native";
 import { connect } from "react-redux";
 import { createStackNavigator } from "@react-navigation/stack";
 import DeckDetail from "./DeckDetail";
@@ -13,7 +12,6 @@ const Stack = createStackNavigator();
 const Decks = ({ dispatch }) => {
   useEffect(() => {
     dispatch(handleFetchDecks());
-    // AsyncStorage.clear();
   }, []);
   return (
     <Stack.Navigator>

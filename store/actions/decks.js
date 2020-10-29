@@ -1,5 +1,5 @@
 import { fetchDecks as fetDecksFromApi, saveDecks } from "../../utils/api";
-export const SET_DECKS = "GET_DECKS";
+export const SET_DECKS = "SET_DECKS";
 export const ADD_CARD = "ADD_CARD";
 export const ADD_DECK = "ADD_DECK";
 
@@ -56,7 +56,7 @@ export const handleAddDeck = (deck) => {
 export const handleSaveDecks = (decks) => {
   return async () => {
     try {
-      const result = saveDecks(decks);
+      const result = await saveDecks(decks);
     } catch (err) {
       console.error(err);
     }
