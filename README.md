@@ -32,7 +32,7 @@ Running project for android:
 npm run android
 ```
 
-####The app works conrrectly on:
+### The app works conrrectly on:
 
 **iOS** and **ANDROID**
 
