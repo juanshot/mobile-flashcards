@@ -39,7 +39,7 @@ const NewDeckQuestion = ({ navigation, route, dispatch }) => {
           </React.Fragment>
         }
         bottom={
-          <Button large onPress={onAddCard}>
+          <Button disabled={!answer || !question} large onPress={onAddCard}>
             Submit
           </Button>
         }

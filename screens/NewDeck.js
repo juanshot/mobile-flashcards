@@ -22,7 +22,7 @@ const NewDeckQuestion = ({ dispatch, navigation }) => {
 
     dispatch(handleAddDeck(newDeck));
     setDeckNameInput(null);
-    navigation.navigate("Decks");
+    navigation.navigate({ name: "Detail", params: { id } });
   };
   return (
     <Container>

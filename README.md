@@ -32,6 +32,10 @@ Running project for android:
 npm run android
 ```
 
+####The app works conrrectly on:
+
+**iOS** and **ANDROID**
+
 #### Contributing
 
 Welcome to contribute to this project. Send me a Pull Request now!
